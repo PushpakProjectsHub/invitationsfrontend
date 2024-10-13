@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import getapilink from './config'
 import './App.css'
 import axios from 'axios'
 
@@ -12,9 +13,9 @@ function App() {
   useEffect(()=>{
     async function fetch_data(){
       console.log('calling useEffect');
-      const response = await axios.get("http://localhost:3001/hello");
+      const response = await axios.get(getapilink('/hello'));
       setData(response.data)
-      const response2=await axios.get("http://localhost:3001/invitationcards");
+      const response2=await axios.get(getapilink("/invitationcards"));
       setInvitations(response2.data);
       console.log(response2.data);
     }
@@ -47,7 +48,7 @@ function App() {
         <button onClick={async() => {
           const newCount = count+1;
           setCount(newCount);
-          const res= await axios.post("http://localhost:3001/count",{count:newCount});
+          const res= await axios.post(getapilink("/count"),{count:newCount});
           console.log(res)
         }
         }>
